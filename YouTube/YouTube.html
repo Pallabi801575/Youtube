@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Youtube Clone</title>
+    <!-- CSS part in style tag -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .header{
+            display: flex;
+            justify-content: space-between;    align-items: center;
+            height: 60px;
+            padding: 15px;
+        }
+        main{
+            height: calc(100vh - 70px);
+            display: flex;
+            background-color: #f9f9f9;
+        }
+        .side-bar {
+            height: 100%;
+            width: 17%;
+            background-color: white;
+            overflow-y: hidden;
+        }
+        .left{
+            display: flex;
+            align-items: center;
+        }
+        .left #menu{
+            padding: 0 7px;
+            cursor: pointer;
+        }
+        .search {
+        display: flex;
+        }
+        .search form {
+            display: flex;
+            border: 1px solid #ddd;
+            height: 45px;
+        }
+        .search input {
+            width: 600px;
+            padding:10px;
+            border: 0;
+            height: 100%;
+            border-radius: 2px 0 0 2px
+        }
+        input:focus {
+            outline: none;
+            border: 1px solid #ddd;
+        }
+        .search button {
+            height: 100%;
+            width: 60px;
+            border: none;
+        }
+        .mic {
+            margin-top: 10px;
+        }
+        .material-icons {
+            color: rgb(100, 100, 100);
+            padding: 0 7px;
+            cursor: pointer;
+        }
+        .nav {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+        }
+        .nav-link span {
+            margin-left: 15px;
+        }
+        .nav-link:hover {
+            background: #e5e5e5;
+            cursor: pointer;
+        }
+        .active {
+            background: #e5e5e5;
+        }
+        hr{
+            height: 1px;
+            background-color: #e5e5e5;
+            border: none;
+        }
+        .content {
+            background-color: #f9f9f9;
+            width: 100%;
+            height: 100%;
+            padding: 15px 15px;
+            border-top: 1px solid #ddd;
+            overflow-y: scroll;
+        }
+        .videos {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .video {
+            width: 270px;
+            margin-bottom: 30px;
+        }
+        .thumbnail {
+            width: 100%;
+            height: 170px;
+        }
+        .thumbnail img {
+            object-fit: cover;
+            height: 94%;
+            width: 100%;
+        }
+        .author img {
+            object-fit: cover;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+        }
+        .details {
+            display: flex;
+        }
+        .title {
+            display: flex;
+            flex-direction: column;
+        }
+        .title h3 {
+            color: rgb(3, 3, 3);
+            line-height: 18px;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        .title a, span {
+            text-decoration: none;
+            color: rgb(96, 96, 96);
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .side-bar{
+                display: none;
+            }
+            .search {
+                display: none;
+            }
+        }
+        @media (max-width: 900px) {
+            .search input {
+                width: 25rem;
+            }
+        }
+
+    </style>
+
+</head>
+<body>
+    <header class="header">
+        <div class="logo left">
+            <i id="menu" class="material-icons">menu</i>
+            <img src="https://www.freecodecamp.org/news/content/images/2022/01/yt-logo.png">
+        </div>
+      
+        <div class="search center">
+            <form action="">
+                <input type="text" placeholder="Search" />
+                <button><i class="material-icons">search</i></button>
+            </form>
+            <i class="material-icons mic">mic</i>
+        </div>
+      
+        <div class="icons right">
+            <i class="material-icons">videocam</i>
+            <i class="material-icons">apps</i>
+            <i class="material-icons">notifications</i>
+            <i class="material-icons display-this">account_circle</i>
+        </div>
+    </header>
+    <main>
+        <div class="side-bar">
+            <div class="nav">
+                <a class="nav-link active">
+                    <i class="material-icons">home</i>
+                    <span>Home</span>
+                </a>
+                <a class="nav-link">
+                    <i class="material-icons">local_fire_department</i>
+                    <span>Trending</span>
+                </a>
+                <a class="nav-link">
+                    <i class="material-icons">subscriptions</i>
+                    <span>Subscriptions</span>
+                </a>
+            </div>
+            <hr>
+            <a class="nav-link">
+                <i class="material-icons">library_add_check</i>
+                <span>Library</span>
+            </a>
+            <a class="nav-link">
+                <i class="material-icons">history</i>
+                <span>History</span>
+            </a>
+            <a class="nav-link">
+                <i class="material-icons">play_arrow</i>
+                <span>Your Videos</span>
+            </a>
+            <a class="nav-link">
+                <i class="material-icons">watch_later</i>
+                <span>Watch Later</span>
+            </a>
+            <a class="nav-link">
+                <i class="material-icons">thumb_up</i>
+                <span>Liked Videos</span>
+            </a>
+        </div>
+
+        <div class="content">
+            <div class="videos">
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="https://img.youtube.com/vi/zUwB_imVjmg/maxresdefault.jpg" alt="" />
+                    </div>
+                    <div class="details">
+                        <div class="author">
+                            <img id="img" draggable="false" class="style-scope yt-img-shadow" alt="" width="128" src="https://yt3.ggpht.com/alMIGlFKsLaHzo5_ZE3gPkN7cA9FGuY-sRZZCkv9IJlMG0N7LlDooWbzEr-N6nWo7qgY4LeSZA=s176-c-k-c0x00ffffff-no-rj-mo">
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Introverts & Content Creation | Sumudu Siriwardana
+                            </h3>
+                            <a href="">
+                                Francesco Ciulla
+                            </a>
+                            <span> 2M Views • 3 Months Ago </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="Taranath_Tantrik_o_Brahmapishach.jpg" alt="Taranath Tantrik o Brahmapishach">
+                    </div>
+                    <div class="details">
+                        <div class="author">
+                            <img id="img" draggable="false" class="style-scope yt-img-shadow" alt="" width="128" src="https://yt3.googleusercontent.com/os420spHqh9Svv_Ijfat-zgCeaBa7nE2s6m67otRbSSBMiYssiu1w4rn9Sq26rNN0s_Y1tfS-fM=s176-c-k-c0x00ffffff-no-rj">
+                        </div>
+                        <div class="title">
+                            <h3>
+                                #SundaySuspense | Taranath Tantrik o Brahmapishach | Taradas Bandopadhyay | Mirchi Bangla
+                            </h3>
+                            <a href="">
+                                Mirchi Bangla
+                            </a>
+                            <span> 1.1M Views • 1 Months Ago </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="The_Upper_Berth.jpg" alt="The Upper Berth" />
+                    </div>
+                    <div class="details">
+                        <div class="author">
+                            <img id="img" draggable="false" class="style-scope yt-img-shadow" alt="" width="128" src="https://yt3.googleusercontent.com/ytc/APkrFKZW37NWeJLwZ0vo7cWdlQ-xl8Tro8rhF8hFMb3c=s176-c-k-c0x00ffffff-no-rj">
+                        </div>
+                        <div class="title">
+                            <h3>
+                                The Upper Berth - Midnight Horror Station | Bengali Onubad Golpo | Horror Story | Mystery Suspense
+                            </h3>
+                            <a href="">
+                                Midnight Horror Station
+                            </a>
+                            <span> 273k Views • 4 years Ago </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="Hanabarite_Ora_Charjon.jpg" alt="Hanabarite Ora Charjon" />
+                    </div>
+                    <div class="details">
+                        <div class="author">
+                            <img id="img" draggable="false" class="style-scope yt-img-shadow" alt="" width="128" src="https://yt3.googleusercontent.com/ytc/APkrFKbZmd72HJk0M0Rz9Wlc0-lfY0RAbIPnhrHCdEz_J8s=s176-c-k-c0x00ffffff-no-rj">
+                        </div>
+                        <div class="title">
+                            <h3>Hanabarite Ora Charjon - Bhuter Golpo| ft.@TheBongGuyOfficial @AaluTheFrenchFry| Haunted House| JAS</h3>
+                            <a href="">
+                                Jibonto Animation
+                            </a>
+                            <span> 1.8M Views • 8 Months Ago </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="NETUDA_BAAGH_BOJHANO.jpg" alt="NETUDA BAAGH BOJHANO" />
+                    </div>
+                    <div class="details">
+                        <div class="author">
+                            <img id="img" draggable="false" class="style-scope yt-img-shadow" alt="" width="40" src="https://yt3.ggpht.com/a3YUPf0uhQEQky2dtpH5LdRHi2-az2JVApTsga7AoCwFGMymiAS0P177yt7Yps6iB9dUabBt=s88-c-k-c0x00ffffff-no-rj">
+                        </div>
+                        <div class="title">
+                            <h3>
+                                #NETUDA BAAGH BOJHANO | Sovan Sundar Das | Bengali Audio Story #noteygachtolargolpo
+                            </h3>
+                            <a href="">
+                                Notey Gachtolar Golpo
+                            </a>
+                            <span> 21k Views • 8 days Ago </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="রেল_লাইনের_সত্য_ভৌতিক_ঘটনা.jpg" alt="রেল লাইনের সত্য ভৌতিক ঘটনা" />
+                    </div>
+                    <div class="details">
+                        <div class="author">
+                            <img id="img" draggable="false" class="style-scope yt-img-shadow" alt="" width="128" src="https://yt3.googleusercontent.com/GjlCUEBMr8BJYwl8gVHWorgj3QqOjF7Bv2N5J9L8S4iTckB9Iw8JVkfHskDb0BLkS3yB29fydA=s176-c-k-c0x00ffffff-no-rj">
+                        </div>
+                        <div class="title">
+                            <h3>
+                                রেল লাইনের সত্য ভৌতিক ঘটনা | gram bangla bhuter golpo | @Pretkotha | @realmir | EPISODE - 29
+                            </h3>
+                            <a href="">
+                                VOUTIK ANUVUTI ORIGINAL
+                            </a>
+                            <span> 366 Views • 3 weeks Ago </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="https://img.youtube.com/vi/zUwB_imVjmg/maxresdefault.jpg" alt="" />
+                    </div>
+                    <div class="details">
+                        <div class="author">
+                            <img src="https://img.youtube.com/vi/zUwB_imVjmg/maxresdefault.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Introverts & Content Creation | Sumudu Siriwardana
+                            </h3>
+                            <a href="">
+                                Francesco Ciulla
+                            </a>
+                            <span> 2M Views • 3 Months Ago </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="https://img.youtube.com/vi/zUwB_imVjmg/maxresdefault.jpg" alt="" />
+                    </div>
+                    <div class="details">
+                        <div class="author">
+                            <img src="https://img.youtube.com/vi/zUwB_imVjmg/maxresdefault.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Introverts & Content Creation | Sumudu Siriwardana
+                            </h3>
+                            <a href="">
+                                Francesco Ciulla
+                            </a>
+                            <span> 2M Views • 3 Months Ago </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="https://img.youtube.com/vi/zUwB_imVjmg/maxresdefault.jpg" alt="" />
+                    </div>
+                    <div class="details">
+                        <div class="author">
+                            <img src="https://img.youtube.com/vi/zUwB_imVjmg/maxresdefault.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Introverts & Content Creation | Sumudu Siriwardana
+                            </h3>
+                            <a href="">
+                                Francesco Ciulla
+                            </a>
+                            <span> 2M Views • 3 Months Ago </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="https://img.youtube.com/vi/zUwB_imVjmg/maxresdefault.jpg" alt="" />
+                    </div>
+                    <div class="details">
+                        <div class="author">
+                            <img src="https://img.youtube.com/vi/zUwB_imVjmg/maxresdefault.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Introverts & Content Creation | Sumudu Siriwardana
+                            </h3>
+                            <a href="">
+                                Francesco Ciulla
+                            </a>
+                            <span> 2M Views • 3 Months Ago </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="https://img.youtube.com/vi/zUwB_imVjmg/maxresdefault.jpg" alt="" />
+                    </div>
+                    <div class="details">
+                        <div class="author">
+                            <img src="https://img.youtube.com/vi/zUwB_imVjmg/maxresdefault.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Introverts & Content Creation | Sumudu Siriwardana
+                            </h3>
+                            <a href="">
+                                Francesco Ciulla
+                            </a>
+                            <span> 2M Views • 3 Months Ago </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="https://img.youtube.com/vi/zUwB_imVjmg/maxresdefault.jpg" alt="" />
+                    </div>
+                    <div class="details">
+                        <div class="author">
+                            <img src="https://img.youtube.com/vi/zUwB_imVjmg/maxresdefault.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Introverts & Content Creation | Sumudu Siriwardana
+                            </h3>
+                            <a href="">
+                                Francesco Ciulla
+                            </a>
+                            <span> 2M Views • 3 Months Ago </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
